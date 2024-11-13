@@ -10,7 +10,7 @@ class Carta:
     def __init__(self, palo, valor):
         self.palo = palo
         self.valor = valor
-        self.valorNumerico = None
+        self.valorNumerico = self.calcularValorNumerico()
         self.visible=False
 
     """
@@ -56,6 +56,10 @@ class Carta:
     def setValorNumerico(self, valorNumerico):
         self.valorNumerico = valorNumerico
 
+    """
+    Nombre: calcularValorNumerico
+    Descripción: Calcula el valor numérico de la carta
+    """
     def calcularValorNumerico(self):
         if self.valor in ['J', 'Q', 'K']:
             self.valorNumerico = 10
