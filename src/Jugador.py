@@ -3,11 +3,12 @@ Clase Jugadorde Blackjack
 """
 class Jugador:
 
-    def __init__(self, nombre, ia=False):
+    def __init__(self, nombre,dinero=1000, ia=False):
         self.nombre = nombre
         self.ia = ia
         self.mano = []
         self.puntos = 0
+        self.dinero = dinero
 
     """
     Nombre: getNombre
@@ -30,6 +31,13 @@ class Jugador:
         return self.puntos
     
     """
+    Nombre: getDinero
+    Descripción: Obtiene el dinero del jugador
+    """
+    def getDinero(self):
+        return self.dinero
+
+    """
     Nombre: setNombre
     Descripción: Establece el nombre del jugador
     """
@@ -50,6 +58,12 @@ class Jugador:
 
     def setPuntos(self, puntos):
         self.puntos = puntos
+
+    """
+    Nombre: setDinero
+    """
+    def setDinero(self, dinero):
+        self.dinero = dinero
 
     """
     Nombre: calcularPuntaje
@@ -84,6 +98,24 @@ class Jugador:
     def stand(self):
         pass
 
+    """
+    Nombre: apostar
+    Entradas: entero
+    Salidas: ninguna
+    Descripción: El jugador apuesta una cantidad de dinero.
+    """
+    def apostar(self, cantidad):
+        self.dinero -= cantidad
+    
+
+    """
+    Nombre: doblar
+    Entradas: entero
+    """
+    def doblar(self, cantidad):
+        pass
+    
+    
     """
     Nombre: decisionIA
     Entradas: mazo
