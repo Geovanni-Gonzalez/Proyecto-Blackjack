@@ -3,12 +3,13 @@ Clase Jugadorde Blackjack
 """
 class Jugador:
 
-    def __init__(self, nombre,dinero=1000, ia=False):
+    def __init__(self, nombre,fichas=1000, ia=False):
         self.nombre = nombre
         self.ia = ia
         self.mano = []
         self.puntos = 0
-        self.dinero = dinero
+        self.fichas=fichas
+        self.apuestaActual=0
 
     """
     Nombre: getNombre
@@ -16,6 +17,15 @@ class Jugador:
     """
     def getNombre(self):
         return self.nombre
+    
+
+    """
+    Nombre: getIA
+    Descripción: Obtiene si el jugador es una IA
+    """
+    def getIA(self):
+        return self.ia
+    
     """
     Nombre: getMano
     Descripción: Obtiene la mano del jugador
@@ -31,11 +41,20 @@ class Jugador:
         return self.puntos
     
     """
-    Nombre: getDinero
-    Descripción: Obtiene el dinero del jugador
+    Nombre: getApuesta
+    Descripcion: Obtiene la apuesta actual del jugador
     """
-    def getDinero(self):
-        return self.dinero
+    def getApuesta(self):
+        return self.apuestaActual
+
+    """
+    Nombre: getFichas
+    Descricion: Obtiene las fichas del jugador
+    """
+    def getFichas(self):
+        return self.fichas
+    
+
 
     """
     Nombre: setNombre
@@ -60,11 +79,12 @@ class Jugador:
         self.puntos = puntos
 
     """
-    Nombre: setDinero
+    Nombre: setApuesta
+    Descripción: Establece la apuesta del jugador
     """
-    def setDinero(self, dinero):
-        self.dinero = dinero
-
+    def setApuesta(self, apuesta):
+        self.apuestaActual = apuesta
+    
     """
     Nombre: calcularPuntaje
     Entradas: ninguna
@@ -105,17 +125,28 @@ class Jugador:
     Descripción: El jugador apuesta una cantidad de dinero.
     """
     def apostar(self, cantidad):
-        self.dinero -= cantidad
+        """Apuesta una cantidad de fichas, valida si tiene suficientes."""
+        if cantidad > self.fichas:
+            raise ValueError("No tienes suficientes fichas para apostar esa cantidad.")
+        else:
+            self.fichas -= cantidad
+            self.apuestaActual = cantidad
     
 
     """
     Nombre: doblar
-    Entradas: entero
+    Entradas: ninguna
     """
-    def doblar(self, cantidad):
-        pass
+    def doblar(self):
+        if self.apuestaActual*2>self.fichas:
+            raise ValueError("No tienes suficientes fichas para doblar la apuesta.")
+        self.fichas-=self.apuestaActual
+        self.apuestaActual*=2
     
-    
+
+    def apostarTodo(self):
+        self.apuestaActual=self.fichas
+        self.fichas=0
     """
     Nombre: decisionIA
     Entradas: mazo
